@@ -13,7 +13,7 @@ import os
 
 CONFIG = DefaultConfig()
 
-openai_api_key = os.environ.get("openai_api_key")
+openai_api_key = CONFIG.open_api_key
 
 def retrive_index():
     if os.path.exists("Indian_Bazaar.pkl"):
@@ -21,12 +21,15 @@ def retrive_index():
             VectorStore = pickle.load(f)
     else:   
         # load document 
-        loader = DirectoryLoader('./', glob="**/*.pdf") 
+        loader = DirectoryLoader('./data/', glob="**/*.pdf") 
         documents = loader.load()
+        # split the documents into chunks 
+        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200) 
+        texts = text_splitter.split_documents(documents)
         # select which embeddings we want to use
         embeddings = OpenAIEmbeddings(openai_api_key = openai_api_key) 
         # create the vectorestore to use as the index 
-        VectorStore = FAISS.from_documents(documents, embedding=embeddings)
+        VectorStore = FAISS.from_documents(texts, embedding=embeddings)
         with open(f"Indian_bazaar.pkl", "wb") as f:
             pickle.dump(VectorStore, f) 
     # # expose this index in a retriever interface 
