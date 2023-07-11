@@ -13,7 +13,7 @@ import os
 
 CONFIG = DefaultConfig()
 
-openai_api_key = CONFIG.open_api_key
+openai_api_key = os.environ.get('open_api_key')
 
 def retrive_index():
     if os.path.exists("Indian_Bazaar.pkl"):
@@ -21,7 +21,7 @@ def retrive_index():
             VectorStore = pickle.load(f)
     else:   
         # load document 
-        loader = DirectoryLoader('./data/', glob="**/*.pdf") 
+        loader = DirectoryLoader('./', glob="**/*.pdf") 
         documents = loader.load()
         # split the documents into chunks 
         text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200) 
