@@ -21,7 +21,7 @@ def retrive_index():
             VectorStore = pickle.load(f)
     else:   
         # load document 
-        loader = DirectoryLoader('./data/', glob="**/*.pdf") 
+        loader = DirectoryLoader('./', glob="**/*.pdf") 
         documents = loader.load()
         # select which embeddings we want to use
         embeddings = OpenAIEmbeddings(openai_api_key = openai_api_key) 
