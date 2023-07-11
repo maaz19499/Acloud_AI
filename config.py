@@ -12,4 +12,4 @@ class DefaultConfig:
     APP_PASSWORD = os.environ.get("MicrosoftAppPassword", "")
 
     # key
-    open_api_key = "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"
+    # open_api_key = ""
