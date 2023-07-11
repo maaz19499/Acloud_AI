@@ -13,7 +13,7 @@ import os
 
 CONFIG = DefaultConfig()
 
-openai_api_key = CONFIG.open_api_key
+openai_api_key = os.environ.get("openai_api_key")
 
 def retrive_index():
     if os.path.exists("Indian_Bazaar.pkl"):
