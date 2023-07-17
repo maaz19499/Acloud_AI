@@ -19,7 +19,7 @@ greenlet==2.0.2
 idna==3.4
 isodate==0.6.1
 jsonpickle==1.4.2
-langchain==0.0.137
+langchain
 langchainplus-sdk==0.0.20
 marshmallow==3.19.0
 marshmallow-enum==1.5.1
