@@ -16,8 +16,8 @@ CONFIG = DefaultConfig()
 openai_api_key = os.environ.get('open_api_key')
 
 def retrive_index():
-    if os.path.exists("Indian_Bazaar.pkl"):
-        with open("Indian_Bazaar.pkl", "rb") as f:
+    if os.path.exists("Acloud_ai.pkl"):
+        with open("Acloud_ai.pkl", "rb") as f:
             VectorStore = pickle.load(f)
     else:   
         # load document 
@@ -30,7 +30,7 @@ def retrive_index():
         embeddings = OpenAIEmbeddings(openai_api_key = openai_api_key) 
         # create the vectorestore to use as the index 
         VectorStore = FAISS.from_documents(texts, embedding=embeddings)
-        with open(f"Indian_bazaar.pkl", "wb") as f:
+        with open(f"Acloud_ai.pkl", "wb") as f:
             pickle.dump(VectorStore, f) 
     # # expose this index in a retriever interface 
     retriever = VectorStore.as_retriever(search_type="similarity", search_kwargs={"k":2})
